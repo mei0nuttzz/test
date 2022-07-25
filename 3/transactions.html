@@ -1,0 +1,66 @@
+<div id="output"></div>
+<script>
+const transac = [
+{
+id: 1,
+sourceAccount: "A",
+targetAccount: "B",
+amount: 100,
+time: "2018-03-02T10:33:00.000Z"
+},
+{
+id: 2,
+sourceAccount: "A",
+targetAccount: "B",
+
+amount: 100,
+time: "2018-03-02T10:33:50.000Z"
+},
+{
+id: 3,
+sourceAccount: "A",
+targetAccount: "B",
+amount: 100,
+time: "2018-03-02T10:34:30.000Z"
+},
+{
+id: 4,
+sourceAccount: "A",
+targetAccount: "B",
+amount: 100,
+time: "2018-03-02T10:36:00.000Z"
+},
+{
+id: 5,
+sourceAccount: "A",
+targetAccount: "C",
+amount: 250,
+time: "2018-03-02T10:33:00.000Z"
+},
+{
+id: 6,
+sourceAccount: "A",
+targetAccount: "C",
+amount: 250,
+time: "2018-03-02T10:33:05.000Z"
+}
+];
+
+const result = transac.map(t => ({
+    key: JSON.stringify([t.sourceAccount, t.targetAccount, t.amount]), 
+    trep: Date.parse(t.time), 
+    t
+})).sort((a,b) => 
+    a.key.localeCompare(b.key) || a.trep - b.trep || a.t.id - b.t.id
+).reduce(([acc, prev], curr) => {
+    if (!prev || curr.key != prev.key || curr.trep - prev.trep > 60000) acc.push([]);
+    acc[acc.length-1].push(curr.t);
+    return [acc, curr];
+}, [[]])[0];
+
+const duplicates = result.filter(a => a.length > 1);
+console.log(duplicates);
+
+document.getElementById('output').innerHTML = JSON.stringify(duplicates);
+
+</script>
