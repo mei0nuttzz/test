@@ -1,0 +1,24 @@
+<script>
+
+    function check(brk){
+        const holder = []
+        const openBrackets = ['(','{','[']
+        const closedBrackets = [')','}',']']
+        for (let letter of brk) { 
+            if(openBrackets.includes(letter)){ 
+                holder.push(letter)
+            }else if(closedBrackets.includes(letter)){
+                const openPair = openBrackets[closedBrackets.indexOf(letter)] 
+                if(holder[holder.length - 1] === openPair){ 
+                    holder.splice(-1,1) 
+                }else{
+                    holder.push(letter)
+                    break
+                }
+            }
+        }
+        return (holder.length === 0)
+    }
+    console.log(check('a(b(x)d)efghijkl')); // true
+    console.log(check('(123).)(qw(e)')); // false
+</script>
