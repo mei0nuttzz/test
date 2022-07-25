@@ -1,0 +1,4 @@
+[25-Jul-2022 08:57:16 Europe/Bucharest] PHP Fatal error:  Uncaught Error: Class 'PHPExcel_Shared_String' not found in /home/ipulro/public_html/1/PHPExcel/PHPExcel/Autoloader.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/ipulro/public_html/1/PHPExcel/PHPExcel/Autoloader.php on line 11
